@@ -1,0 +1,12 @@
+version: '3'
+services:
+   redis:
+     image: redis:7.0.0-bullseye
+     ports:
+     - "6379:6379"
+   app:
+     image: dalongrong/openresty:1.21.4.1-alpine-fat
+     ports:
+     - "80:80"
+     volumes:
+     - "./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
