@@ -1,12 +1,29 @@
 version: '3'
 services:
+   benthos:
+     image: node:14.19.3-slim
+     command: node  /opt/index.js
+     volumes:
+     - "./app/index.js:/opt/index.js"
    redis:
      image: redis:7.0.0-bullseye
      ports:
      - "6379:6379"
    app:
-     image: dalongrong/openresty:1.21.4.1-alpine-fat
+     image: dalongrong/openresty-tengine:debug-njs-perf
+     privileged: true
+     cap_add:
+       - ALL
      ports:
      - "80:80"
+     volumes:
+     - "./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+   app2:
+     image: dalongrong/openresty-tengine:debug-njs-perf
+     privileged: true
+     cap_add:
+       - ALL
+     ports:
+     - "82:80"
      volumes:
      - "./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"

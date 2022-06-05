@@ -31,6 +31,6 @@ pub message:
 curl --location --request POST 'localhost/redis_pub/demoapp' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    name:"dalong"
+    "name":"dalong"
 }'
 ```
